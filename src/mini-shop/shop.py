@@ -25,20 +25,24 @@ class Cart:
         item = CartItem(product, qty)
         self.items.append(item)
 
+    def total(self):
+        total_sum = 0
+        for item in self.items:
+            total_sum += item.line_total()
+        return total_sum
+
 
 def main():
     p1 = Product("S7R8", "Arturia Minilab Mk III", 119.99) 
     p2 = Product("BG33", "Arturia MiniFuse II", 99.99) 
     print(p1)
     print(p2)
-    i = CartItem(p1,4)
     cart = Cart()
     cart.add_product(p1,4)
     cart.add_product(p2,3)
-    print(cart.items[0].line_total())
     for item in cart.items:
         print(item.line_total())
-
+    print(f"Total cost of all products is: {cart.total()} €")
 
 
 if __name__ == "__main__":
