@@ -22,8 +22,19 @@ class Cart:
         self.items = []
 
     def add_product(self, product, qty: int):
-        item = CartItem(product, qty)
-        self.items.append(item)
+        for item in self.items:
+            if item.product == product:  
+                item.qty += qty
+                return
+        self.items.append(CartItem(product, qty))
+
+    def remove_product(self, product, qty: int):
+        for item in self.items:
+            if item.product == product:
+                item.qty -= qty 
+                if item.qty <= 0:
+                    self.items.remove(item)
+                return
 
     def total(self):
         total_sum = 0
